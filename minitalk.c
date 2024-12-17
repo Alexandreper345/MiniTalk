@@ -6,18 +6,37 @@
 /*   By: alda-sil <alda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:18:13 by alda-sil          #+#    #+#             */
-/*   Updated: 2024/12/16 21:29:39 by alda-sil         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:21:15 by alda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-
 void	signalhandler(int sig)
 {
-	ft_printf("RECEIVED SIGNAL %d\n",sig);
+	static  int i;
+	static  int c;
+	
+	if (!i)
+		i = 0;
+	if (!c)
+		c = 0;
+
+	if (sig == SIGUSR2)
+	{
+		c += (128 >> i);
+	}
+
+	i++;
+	
+	if (i == 8)
+	{
+		ft_printf("%c", c);
+		c = 0;
+		i = 0;
+	}
 }
-int main(int argc, char **argv)
+int main(void)
 {
 	int pid;
 	pid = getpid();
