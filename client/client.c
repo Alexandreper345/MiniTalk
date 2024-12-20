@@ -1,6 +1,5 @@
 #include "../minitalk.h"
 
-
 void bitandbit(int pid, unsigned char octeto)
 {
 	int i;
@@ -13,8 +12,38 @@ void bitandbit(int pid, unsigned char octeto)
 		else
 			kill(pid,SIGUSR1);
 		i--;
-		usleep(600);
+		usleep(200);
 	}
+}
+
+void	send_msg(int id , char *mense)
+{
+	int	i;
+
+	i = 0;
+
+	while (mense[i])
+	{
+		bitandbit(id,mense[i]);
+		i++;
+	}
+}
+
+int	check_menseng(char *pid, char *msg)
+{
+	if (!msg)
+		return(-1);
+	while (*pid)
+	{
+		if (!ft_isdigit(*pid) || *pid < 0)
+		{
+			ft_printf("insira um pid valido\n");
+			return (-1);
+		}
+		pid++;
+	}
+	return (0);
+
 }
 
 int	main(int argc, char **argv)
@@ -24,10 +53,14 @@ int	main(int argc, char **argv)
 	i = 0;
 	if (argc == 3)
 	{
-		while (argv[2][i] != '\0')
-		{
-			bitandbit(ft_atoi(argv[1]),argv[2][i]);
-			i++;
-		}
+		if (check_menseng(argv[1], argv[2]) == -1)
+			return (0);
+		else
+			send_msg(ft_atoi(argv[1]),argv[2]);
+	}
+	else
+	{
+		ft_printf("opa você esqueceu de insirir um pid :(\n");
+		ft_printf("opa você esqueceu de insirir uma frase :(\n");
 	}
 }

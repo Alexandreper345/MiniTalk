@@ -6,7 +6,7 @@
 /*   By: alda-sil <alda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:18:13 by alda-sil          #+#    #+#             */
-/*   Updated: 2024/12/17 18:21:15 by alda-sil         ###   ########.fr       */
+/*   Updated: 2024/12/19 21:24:08 by alda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,20 @@ void	signalhandler(int sig)
 		i = 0;
 	}
 }
-int main(void)
+int main(int argc, char **argv)
 {
-	int pid;
-	pid = getpid();
-	ft_printf("%d\n",pid);
-	signal(SIGUSR1, signalhandler);
-	signal(SIGUSR2, signalhandler);
-	if (pid == -1)
+	(void)argv;
+	
+	if (argc != 1)
+		ft_printf("Error: format invalid");
+	else
 	{
-		ft_printf("error\n");
-		return (1);
+		ft_printf("PID: %d\n",getpid());
+		while (1)
+		{
+			signal(SIGUSR1, signalhandler);
+			signal(SIGUSR2, signalhandler);
+		}
 	}
-	while (1)
-		pause();	
 	return (0);
 }
