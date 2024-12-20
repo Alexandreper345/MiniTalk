@@ -6,11 +6,11 @@
 /*   By: alda-sil <alda-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:18:13 by alda-sil          #+#    #+#             */
-/*   Updated: 2024/12/19 21:24:08 by alda-sil         ###   ########.fr       */
+/*   Updated: 2024/12/19 21:40:00 by alda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../minitalk.h"
 
 void	signalhandler(int sig)
 {
